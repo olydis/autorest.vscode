@@ -432,7 +432,7 @@ export class OpenApiDocumentManager extends TextDocuments {
   async onSaving(saving: TextDocumentChangeEvent) {
     let documentUri = saving.document.uri;
     let documentContent = saving.document.getText();
-    if ((await AutoRest).IsSwaggerExtension(GetExtension(documentUri))) {
+    if (documentUri.endsWith(".md")) {
       let content = await (await AutoRest).LiterateToJson(documentContent);
       if (content && await (await AutoRest).IsSwaggerFile(content)) {
 
